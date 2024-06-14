@@ -2,12 +2,17 @@
 
 ### Function
 
-- CTRL + SHIFT + CMD + ...
+- CTRL + SHIFT + CMD + key
   - s: Scan: Scan all images and store download urls
   - d: Download: Download all images
 
 ### TODO:
 
-- download function:
+- Scan function:
+
+  - [x] Scan URLs to array
+  - [x] Persistent selection (border) when layout shifts (scroll, or change panel)
+
+- Download function:
   - [ ] Ignore already existed files.
   - [ ] Download to a dir named as the current date

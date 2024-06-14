@@ -1,5 +1,3 @@
-const domain = "https://civitai.com";
-
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   console.log(`\naction: ${message.action} received\n`);
   switch (message.action) {
@@ -11,7 +9,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
     case "download":
       console.log("download clicked");
-      download();
       break;
 
     case "createProject":
@@ -23,10 +20,6 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-const set = new Set();
-
-function download() {
-  console.log(set);
-}
+function download() {}
 
 function run() {}

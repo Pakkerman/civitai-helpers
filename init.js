@@ -1,12 +1,20 @@
-// init the page
-
 if (window.location.href.includes("generate")) {
   void init();
 }
+const URL_PATTERN = "https://orchestration.civitai.com/v1/consumer/images/";
+const imageURLs = new Set();
 
-const images = new Set();
 async function init() {
   initActions();
+
+  const observer = new MutationObserver(() => {
+    console.log("observer fired");
+    selectImgs();
+  });
+  observer.observe(document.querySelector("div[role='tabpanel']"), {
+    childList: true,
+    subtree: true,
+  });
 }
 
 function initActions() {
@@ -17,7 +25,7 @@ function initActions() {
 
     switch (key) {
       case "D":
-        download();
+        download(imageURLs);
         break;
 
       case "S":
@@ -29,41 +37,21 @@ function initActions() {
   });
 }
 
-function download() {
-  console.log("download action");
-
-  [...images].forEach((item, idx) => {
-    setTimeout(() => {
-      downloadFn(item);
-      console.log(`\rdownloading: ${idx}`);
-    }, idx * 100);
-  });
-
-  async function downloadFn(url) {
-    try {
-      const response = await fetch(url);
-      const blob = await response.blob();
-      const link = document.createElement("a");
-
-      link.href = URL.createObjectURL(blob);
-      link.download = url.split("/")[6];
-      link.click();
-
-      URL.revokeObjectURL(link.href);
-    } catch {
-      console.log("this blew up");
-    }
-  }
-}
 function scan() {
   console.log("scan action");
 
   document.querySelectorAll("img").forEach((item) => {
-    if (!item.src.includes("images")) return;
-
-    images.add(item.src);
-    item.setAttribute("style", "border: 4px solid #FB923C");
+    if (item.src.includes(URL_PATTERN)) imageURLs.add(item.src);
   });
 
-  console.log(images.size);
+  selectImgs();
+}
+
+function selectImgs() {
+  const arr = [...imageURLs];
+  document.querySelectorAll("img").forEach((item) => {
+    if (!arr.includes(item.src)) return;
+
+    item.setAttribute("style", "border: 4px solid #FB923C");
+  });
 }
