@@ -1,8 +1,10 @@
-if (window.location.href.includes("generate")) {
-  void init();
-}
+// if (window.location.href.includes("generate")) {
+//   void init();
+// }
 const URL_PATTERN = "https://orchestration.civitai.com/v1/consumer/images/";
 const imageURLs = new Set();
+
+init();
 
 async function init() {
   initActions();
@@ -25,11 +27,19 @@ function initActions() {
 
     switch (key) {
       case "D":
+        toast("action/download");
         download(imageURLs);
         break;
 
       case "S":
+        toast("action/scan");
         scan();
+        break;
+
+      case "L":
+        toast("action/clickLike");
+        clickLike();
+        break;
 
       default:
         break;

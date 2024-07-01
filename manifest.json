@@ -12,8 +12,14 @@
 
   "content_scripts": [
     {
-      "matches": ["https://civitai.com/generate"],
-      "js": ["content.js", "init.js", "actions/download.js"],
+      "matches": ["https://civitai.com/*"],
+      "js": [
+        "content.js",
+        "init.js",
+        "actions/download.js",
+        "actions/clickLike.js",
+        "overlays/toast.js"
+      ],
       "run_at": "document_idle"
     }
   ],
