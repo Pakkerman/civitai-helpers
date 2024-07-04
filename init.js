@@ -7,7 +7,7 @@ const imageURLs = new Set();
 init();
 
 async function init() {
-  initActions();
+  await initActions();
 
   const observer = new MutationObserver(() => {
     console.log("observer fired");
@@ -19,7 +19,7 @@ async function init() {
   });
 }
 
-function initActions() {
+async function initActions() {
   document.addEventListener("keydown", (e) => {
     const { key, shiftKey, ctrlKey, metaKey } = e;
 
@@ -39,6 +39,11 @@ function initActions() {
       case "L":
         toast("action/clickLike");
         clickLike();
+        break;
+
+      case "F":
+        toast("action/autofillTags");
+        autofillTags();
         break;
 
       default:
