@@ -16,11 +16,13 @@
       "js": [
         "content.js",
         "init.js",
+        "utils.js",
         "overlays/toast.js",
         "actions/download.js",
         "actions/clickLike.js",
         "actions/autofillTags.js"
       ],
+      "css": ["content.css"],
       "run_at": "document_idle"
     }
   ],
